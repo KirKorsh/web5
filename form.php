@@ -7,7 +7,7 @@ body{
     font-family: "Montserrat", sans-serif;
 }
 div.table ,#form, div.link-list{
-    background-color: rgba(123, 0, 212, 0.24);
+   
 }
 label {
     margin:10px 0;
@@ -145,7 +145,7 @@ if (!empty($messages)) {
        if(empty($_SESSION['login'])){
        print('
        <div  '.$cl_e.' >
-       <input name="check" type="check-1" '.$ch.'> Я согласен согласен <br>
+       <input name="check" type="check-1" '.$ch.'> Я согласен Дать данные <br>
        </div>');}
        ?>
 
