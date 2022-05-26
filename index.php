@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     setcookie('pol_value', '', 100000);
     setcookie('limb_value', '', 100000);
     setcookie('bio_value', '', 100000);
-    setcookie('run_value', '', 100000);
+    setcookie('power_value', '', 100000);
     setcookie('sleep_value', '', 100000);
     setcookie('fly_value', '', 100000);
     setcookie('check_value', '', 100000);
@@ -146,7 +146,7 @@ else {
     $year = $_POST['year'];
     $pol=$_POST['radio-1'];
     $limbs=$_POST['radio-2'];
-    $runs=$_POST['super'];
+    $powers=$_POST['super'];
     $bio=$_POST['bio'];
     if(empty($_SESSION['login'])){
       $check=$_POST['check'];
@@ -208,7 +208,7 @@ else {
       setcookie('limb_error','',100000);
     }
 
-    if (!isset($runs)) {
+    if (!isset($powers)) {
       setcookie('super_error', '1', time() + 24 * 60 * 60);
       setcookie('fly_value', '', 100000);
       setcookie('sleep_value', '', 100000);
@@ -221,7 +221,7 @@ else {
         "sleep_value"=>0,
         "run_value"=>0,
       );
-    foreach($runs as $pwer){
+    foreach($powers as $pwer){
       if($pwer=='fly'){setcookie('fly_value', 1, time() + 12 * 30 * 24 * 60 * 60); $apw['fly_value']=1;} 
       if($pwer=='sleep'){setcookie('sleep_value', 1, time() + 12*30 * 24 * 60 * 60);$apw['sleep_value']=1;} 
       if($pwer=='run'){setcookie('run_value', 1, time() + 12*30 * 24 * 60 * 60);$apw['run_value']=1;} 
@@ -290,10 +290,10 @@ else {
       $upd->execute();
       $del=$db->prepare("DELETE FROM super WHERE per_id=?");
       $del->execute(array($id));
-      $upd1=$db->prepare("INSERT INTO super SET name=:run,per_id=:id");
+      $upd1=$db->prepare("INSERT INTO super SET name=:power,per_id=:id");
       $upd1->bindParam(':id',$id);
-      foreach($runs as $pwr){
-        $upd1->bindParam(':run',$pwr);
+      foreach($powers as $pwr){
+        $upd1->bindParam(':power',$pwr);
         $upd1->execute();
       }
     }
@@ -323,10 +323,10 @@ else {
           $usr->bindParam(3,$pass_hash);
           $usr->execute();
 
-          $pwr=$db->prepare("INSERT INTO super SET name=:run, per_id=:id");
+          $pwr=$db->prepare("INSERT INTO super SET name=:power, per_id=:id");
           $pwr->bindParam(':id',$id);
-          foreach($_POST['super'] as $runs){
-            $pwr->bindParam(':run',$runs); 
+          foreach($_POST['super'] as $powers){
+            $pwr->bindParam(':power',$powers); 
             $pwr->execute();  
           }
         }
