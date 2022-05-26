@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $pass = '9303559';
     $db = new PDO('mysql:host=localhost;dbname=u47577', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
     try{
-      $get=$db->prepare("SELECT * FROM application WHERE id=?");
+      $get=$db->prepare("SELECT * FROM form WHERE id=?");
       $get->bindParam(1,$_SESSION['uid']);
       $get->execute();
       $inf=$get->fetchALL();
@@ -274,7 +274,7 @@ else {
     $db = new PDO('mysql:host=localhost;dbname=u47577', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
     if (!empty($_COOKIE[session_name()]) && !empty($_SESSION['login']) and !$errors) {
       $id=$_SESSION['uid'];
-      $upd=$db->prepare("UPDATE application SET name=:name, email=:email, year=:byear, pol=:pol, limbs=:limbs, bio=:bio WHERE id=:id");
+      $upd=$db->prepare("UPDATE form SET name=:name, email=:email, year=:byear, pol=:pol, limbs=:limbs, bio=:bio WHERE id=:id");
       $cols=array(
         ':name'=>$name,
         ':email'=>$email,
@@ -306,7 +306,7 @@ else {
         setcookie('pass', $pass);
 
         try {
-          $stmt = $db->prepare("INSERT INTO application SET name=:name, email=:email, year=:byear, pol=:pol, limbs=:limbs, bio=:bio");
+          $stmt = $db->prepare("INSERT INTO form SET name=:name, email=:email, year=:byear, pol=:pol, limbs=:limbs, bio=:bio");
           $stmt->bindParam(':name',$_POST['name']);
           $stmt->bindParam(':email',$_POST['email']);
           $stmt->bindParam(':byear',$_POST['year']);
